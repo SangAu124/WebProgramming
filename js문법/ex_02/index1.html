@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercise</title>
+    <script src="./index.js"></script>
+    <style>
+      table, th, tr, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="return check()">
+      <table>
+        <tr>
+          <th>아이디</th> <td><input type="text" id="userid"></td>
+        </tr>
+        <tr>
+          <th>생년월일(YYMMDD)</th>
+          <td><input type="text" id="birthday" maxlength="6"></td>
+        </tr>
+        <tr>
+          <th>비밀번호(최소4자)</th> <td><input type="password" id="password"></td>
+        </tr>
+        <tr>
+          <th>비밀번호 확인</th> <td><input type="password" id="password2"></td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="submit" value="확인"></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
+

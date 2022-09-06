@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercise2</title>
+    <script src="./ex2.js"></script>
+    <style>
+      table, th, tr, td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="return check()">
+      <table>
+        <tr>
+          <td>성별</td>
+          <td>
+            <input type="radio" name="gender" value="male">남성
+            <input type="radio" name="gender" value="female">여성
+          </td>
+        </tr>
+        <tr>
+          <td>연령</td>
+          <td>
+            <select name="age">
+              <option value="0">10대 미만</option>
+              <option value="10">10대</option>
+              <option value="20">20대</option>
+              <option value="30">30대</option>
+              <option value="40">40대 이상</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>신청 항목</td>
+          <td>
+            <input type="checkbox" name="item" value="notebook">공책
+            <input type="checkbox" name="item" value="pencil">연필
+            <input type="checkbox" name="item" value="ballpen">볼펜
+            <input type="checkbox" name="item" value="ruler">자
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="submit" value="확인"></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

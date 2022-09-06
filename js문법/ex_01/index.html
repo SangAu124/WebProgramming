@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hi, I'm sangeun</title>
+        <style>
+            table, th, tr, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">점수</th>
+                    <th rowspan="2">학년</th>
+                </tr>
+                <tr>
+                    <th>1학기</th>
+                    <th>2학기</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>90</td>
+                    <td>95</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>80</td>
+                    <td>100</td>
+                    <td>A</td>
+                </tr>
+
+                <tr>
+                    <td>80</td>
+                    <td>85</td>
+                    <td>B</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <form name="registerForm" onsubmit="return check1()">
+            <input type="text" name="name">
+            <input type="text" name="phone">
+            <input type="submit" value="확인">
+        </form>
+
+        <form name="registerForm" onsubmit="return check2()">
+            <input type="radio" name="dessert" value="fruit">과일
+            <input type="radio" name="dessert" value="coffee">커피
+            <input type="radio" name="dessert" value="rea">녹차
+            <input type="radio" name="dessert" value="icecream">아이스크림
+            <input type="submit" value="선택">
+        </form>
+        
+        <form name="registerForm" onsubmit="return check3()">
+            <input type="checkbox" name="dessert" value="fruit">과일
+            <input type="checkbox" name="dessert" value="coffee">커피
+            <input type="checkbox" name="dessert" value="rea">녹차
+            <input type="checkbox" name="dessert" value="icecream">아이스크림
+            <input type="submit" value="선택">
+        </form>
+
+
+        <script>
+            function check3() {
+                // 모든 항목의 true/false 확인
+                const query = 'input[type="checkbox"]';
+                const checks = document.querySelectorAll(query);
+                checks.forEach((i)=>{
+                    console.log(`Checked: ${i.value} - ${i.checked}`);
+                })
+                // 체크 된 항목만 검색
+                const query2 = 'input[type="checkbox"]';
+                const trueChecked = document.querySelectorAll(query2);
+                trueChecked.forEach((i)=>{
+                    console.log(`Checked: ${i.value} - ${i.checked}`);
+                })
+                // 특정 이름의 체크 된 항목만 검색
+                const query3 = 'input[type="checkbox"]';
+                const favChecked = document.querySelectorAll(query3);
+                favChecked.forEach((i)=>{
+                    console.log(`Checked: ${i.value} - ${i.checked}`);
+                })
+                return false;
+            }
+        </script>
+        <script>
+            function check2() {
+                const query = 'input[name="dessert"]:checked';
+                const selected = document.querySelector(query);
+                if(selected == null) {
+                    alert("디저트를 선택해주세요");
+                    return fasle;
+                }
+                console.log(selected.value);
+                return true;
+            }
+        </script>
+        <script>
+            function check1() {
+                if(document.registerForm.name.value.length == 0) {
+                    alert('이름을 입력하세용')
+                    return false;
+                }
+                if(document.registerForm.phone.value.length == 0) {
+                    alert('전화번호를 입력하세용')
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <script>
+            document.forms[0].elements[0].value = "정우재";
+            document.registerForm.phone.value = "010-5795-7706"
+        </script>
+    </body>
+</html>
