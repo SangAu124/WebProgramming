@@ -1,24 +1,28 @@
 const express = require('express');
 const router = express.Router();
+const tododb = require('../../todos/models/mariadb/todo');
 
 
-router.get('/', (req, res)=>{
-    const todos=[
-        {todoId:1, job:'JS Study'},
-        {todoId:2, job:'Workout'}
-    ];
-    res.json(todos);
+router.get('/', async (req, res)=>{
+    const rows = await tododb.selectTodos();
+    res.json(rows);
 })
 
 
-router.post('/', (req, res)=>{
+router.post('/', async (req, res)=>{
     const {job} = req.body;
-    res.json({result:'ok'});
+    const result = await tododb.insertTodo(job);
+    console.log(result);
+    if(result && result.affectedRowos==1) res.json({result:'ok'});
+    else res.json({result:'ng'});
 })
 
 
-router.delete('/:todoId', (req, res)=>{
+router.delete('/:todoId', async (req, res)=>{
     const todoId = req.params.todoId;
-    res.json({result:'oh'});
+    const result = await tododb.deleteTodo(todoId);
+    console.log(result);
+    if(result && result.affectedRowos==1) res.json({result:'ok'});
+    else res.json({result:'ng'});
 })
 module.exports=router;
