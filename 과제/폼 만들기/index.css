@@ -1,0 +1,113 @@
+.rootContainer {
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.baseView {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    width: 500px;
+    height: 700px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 5px;
+}
+
+.view1 {
+    height: 20%;
+
+}
+
+.title {
+    margin-top: 50px;
+    margin-bottom: 35px;
+}
+
+.inputs {
+    overflow-y: scroll;
+    width: 80%;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.inputs::-webkit-scrollbar {
+    display: none;
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.inputButton {
+    background-color: lightgray;
+    border: 0px;
+    width: 80%;
+    border-radius: 5px;
+    height: 45px;
+    margin-bottom: 50px;
+}
+
+.miniText {
+    font-size: small;
+    margin-bottom: 7px;
+    margin-left: 2px;
+    color: rgb(108, 108, 108);
+}
+
+.miniText1 {
+    font-size: small;
+    margin-left: 2px;
+    color: rgb(108, 108, 108);
+}
+
+.inputTextField {
+    height: 40px;
+    width: 100%;
+    background-color: whitesmoke;
+    border-width: 0px;
+    border-radius: 5px;
+    outline: none;
+    padding: 0px 20px;
+    box-sizing: border-box;
+}
+
+.sort{
+    height: 40px;
+    width: 100%;
+    background-color: whitesmoke;
+    border-width: 0px;
+    border-radius: 5px;
+    outline: none;
+    padding: 0px 10px;
+    box-sizing: border-box;
+}
+
+.lastSection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    column-gap: 15px;
+}
+
+.sectionItem {
+    width: 100%;
+}
+
+.agree {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.checkBox1 {
+    margin-right: 30px;
+}

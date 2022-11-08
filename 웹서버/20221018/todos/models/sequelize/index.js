@@ -6,4 +6,4 @@ const sequelize = new Sequelize(
     config.usename,
     config.password,
     config
-);
+);   

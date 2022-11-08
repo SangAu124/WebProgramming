@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>거래처</title>
+
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="rootContainer">
+      <form class="baseView" name="registerForm" onsubmit="return check()">
+        <div class="view1">
+          <h1 class="title">거래처 등록</h1>
+        </div>
+
+        <div class="inputs">
+          <div>
+            <div class="miniText">상호</div>
+            <input class="inputTextField" type="text" id="company" name="company"/>
+          </div>
+
+          <div>
+            <div class="miniText">대표자</div>
+            <input class="inputTextField" type="text" id="CEO"/>
+          </div>
+
+          <div>
+            <div class="miniText">사업자 등록 번호</div>
+            <input class="inputTextField" type="text" id="businessNum"/>
+          </div>
+
+          <div>
+            <div class="miniText">대표 전화</div>
+            <input class="inputTextField" type="text" id="CEONum"/>
+          </div>
+
+          <div>
+            <div class="miniText">거래처 ID</div>
+            <input class="inputTextField" type="text" id="customerId"/>
+          </div>
+
+          <div>
+            <div class="miniText">비밀번호</div>
+            <input class="inputTextField" type="text" id="password"/>
+          </div>
+
+          <div>
+            <div class="miniText">비밀번호 확인</div>
+            <input class="inputTextField" type="text" id="passwordCheck"/>
+          </div>
+
+          <div class="lastSection">
+            <div class="sectionItem">
+              <div class="miniText">분류</div>
+              <select class="sort" id="section">
+                <option value="big">대기업</option>
+                <option value="mid">중소기업</option>
+                <option value="sma">소상공인</option>
+              </select>
+            </div>
+            <div class="sectionItem">
+              <div class="miniText">처리 방법</div>
+              <select class="sort" id="way">
+                <option value="dir">즉시등록</option>
+                <option value="rea">임시저장</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="agree">
+            <form>
+                <div class="miniText1">동의함</div>
+                <input type="radio" class="checkBox1" name="agree" value="agree" checked>
+                <div class="miniText1">동의 안함</div>
+                <input type="radio" name="agree" value="disagree">
+            </form>
+          </div>
+
+          <div class="buttonDiv">
+            <input type="submit" value="등록" class="inputButton">
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
