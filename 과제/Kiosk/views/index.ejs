@@ -1,0 +1,178 @@
+<html lang="ko">
+<head>
+    <%-include('head.ejs') %>
+    <title>index</title>
+</head>
+<body>
+    <%-include('nav.ejs')%>
+
+    <div class="menu py-5">
+        <div class="container">
+            <div id="cardWrap" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3"></div>
+        </div>
+    </div>
+
+    <div class="basket py-5 bg-light pt-3">
+        <div class="row justify-content-between">
+            <h1 class="m-5 col-2">장바구니</h1>
+            <h4 class="col-2 m-5" id="totalPrice"></h4>
+            <div class="buttonGroup m-5 col-2 row">
+                <button type="button" class="btn btn-danger col-sm m-3" onclick="clearBasket()">전체 삭제</button>
+                <button type="button" class="btn btn-success col-sm m-3" onclick="orderBasket()">주문 하기</button>
+            </div>
+        </div>
+            
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3" id="basketWrap"></div>
+        </div>
+    </div>
+
+<script>
+    
+    let list=[];
+
+    const getTotalPrice = () => {
+        let total = 0;
+        for (let i = 0; i < list.length; i++) {
+            total += Number(list[i].price);
+        }
+        if (total <= 0) {
+            total = 0;
+        }
+        let totalPrice = document.querySelector('#totalPrice');
+        totalPrice.innerText = `총 가격 : ${total}원`;
+
+        window.localStorage.setItem("totalPrice", total);
+        return total;
+    }
+
+    const clearBasket = () => {
+        templat('메뉴를 모두 삭제했습니다.');
+    };
+
+    const orderBasket = () => {
+        templat('주문을 완료하였습니다.');
+    };
+
+    const templat = (text) =>{
+        killChild();
+        list = [];
+        alert(text);
+        getTotalPrice();
+    };
+
+    function intoBasket(object) {
+        killChild();
+        list.push(object);
+        printBasket();
+        alert(`${object.name}이/가 추가되었습니다.`);
+    }
+
+    function deleteBasket(id) {
+        console.log(list);
+
+
+        for(let i = 0; i < list.length; i++) {
+            if(list[i].id == id) {
+                list.splice(i, 1);
+            }
+        }
+
+        let tag = document.querySelector('#div'+id);
+        console.log(tag);
+        tag.remove();
+
+        console.log(list);
+
+        getTotalPrice();
+        alert(`선택하신 항목을 삭제하였습니다.`);
+    }
+
+    const killChild = ()=>{
+        const parent = document.getElementById('basketWrap');
+        while(parent.firstChild)  {
+            parent.firstChild.remove()
+        }
+        getTotalPrice();
+    };
+
+    const basketWrap = document.querySelector('#basketWrap');
+
+    const printBasket = ()=>{
+
+        list.map((item) => {
+            
+            const div = document.createElement("div");
+            div.id = "niceparent";
+            div.className = 'col';
+            div.innerHTML = `
+            <div class="card shadow-sm" id="div${item.id}"> 
+                <img src="${item.imageUrl}" class="bd-placeholder-img card-img-top" width="100%" height="100" role="img" aria-label="Placeholder: 김" preserveaspectratio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
+                <div class="card-body">${item.name}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deleteBasket(${item.id})">빼기</button>
+                        </div>
+                        <small class="text-muted" id="price">${item.price}</small>
+                    </div>
+                </div>
+            </div> 
+            `;
+            basketWrap.appendChild(div);
+            
+        });
+        getTotalPrice();
+    }
+
+
+   const selectMenu = async() => {
+    try {
+
+      const {data} = await axios.get("/admin/menu-all");
+
+      const wrap = document.querySelector('#cardWrap');
+      
+
+      data.map((item) => {
+
+        let menuObject = {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            imageUrl: item.imageUrl
+        }
+
+        const div = document.createElement("div");
+        div.className = 'col';
+        div.innerHTML = `
+              <div class="card shadow-sm">
+                <img src='${item.imageUrl}' class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" aria-label="Placeholder: 김" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+                <div class="card-body">
+                  <p class="card-text" id="name">${item.name}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" id="itemButton${item.id}" class="btn btn-sm btn-outline-secondary">담기</button>
+                    </div>
+                    <small class="text-muted" id="price">${item.price}원</small>
+                  </div>
+                </div>
+              </div>
+        `;
+        wrap.appendChild(div)
+
+        const itemButton = document.querySelector(`#itemButton${item.id}`);
+        itemButton.addEventListener('click',()=>{intoBasket(item)});
+
+        
+      });
+      getTotalPrice()
+
+    } catch (error) {
+      alert('실패..;;');
+    }
+   }
+
+  window.onload = selectMenu;
+</script>
+</body>
+</html>

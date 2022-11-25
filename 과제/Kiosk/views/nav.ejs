@@ -1,0 +1,44 @@
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-black">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">상은커피</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">커피</a>
+                    </li>
+                </ul>
+                <form class="d-flex mt-3">
+                    <input class="form-control me-2 username" type="text" placeholder="username">
+                    <input class="form-control me-2 password" type="text" placeholder="password">
+                    <button class="btn btn-primary" type="button">login</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            const btn = document.querySelector(".btn");
+
+            const userid = document.querySelector(".username");
+            const password = document.querySelector(".password");
+
+            btn.addEventListener("click",()=>{
+                axios.post('/api/login', {
+                    userid: userid.value,
+                    password: password.value
+                })
+                .then(function (response) {
+                    alert('로그인에 성공했습니다.')
+                    window.location.href = '/admin'
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    alert('로그인에 실패했습니다.')
+                    console.log(error);
+                })
+            }) 
+        </script>
+    </nav>
+

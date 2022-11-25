@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('head.ejs') %>
+    <title>insert</title>
+</head>
+<body>
+    <% for(let i = 0; i < 4; i++) { %>
+    <br>
+    <%}%>
+    <div class="container">
+            <div class="form-group">
+                <input type="hidden" value="<%  %>">
+                <label>상품의 이름을 입력하세요.</label>
+                <input type="text" class="form-control" id="name" placeholder="상은커피">
+            </div>
+            <div class="form-group mt-3">
+                <label>상품의 가격을 입력하세요.</label>
+                <input type="text" class="form-control" id="price" placeholder="6000">
+            </div>
+            <div class="form-group mt-5">
+                <label>사진을 넣어주세요.</label>
+                <input type="file" class="form-control-file" id="imageUrl">
+            </div>
+            <button onclick="createMenu()">등록</button>
+    </div>  
+</body>
+<script>
+    const createMenu = async() => {
+        let titleInputValue = document.querySelector("#name").value;
+        let priceInputValue = document.querySelector("#price").value;
+        let fileInputValue = document.querySelector("#imageUrl")
+        const id = window.location.pathname.split("/")[3];
+
+        console.log(fileInputValue);
+
+        
+        let formData = new FormData();
+        
+        formData.append("name", titleInputValue)
+        formData.append("price", priceInputValue)
+        formData.append("file", fileInputValue.files[0])
+
+
+        try {
+            
+            await axios.post("/admin/update/"+ id , formData);
+            window.location.href = '/admin'
+
+        } catch (error) {
+            alert('실패...;;');
+        }
+    }
+</script>
+</html>
